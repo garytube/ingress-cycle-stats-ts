@@ -1,5 +1,7 @@
 # Svelte 5 Reactivity Bug(????)
 
+[>>> **DEMO LINK** <<<](https://ingress-cycle-stats-ts.vercel.app/)
+
 Hi, i have created a custom store with runes. It holds a simple game-score object. If the user selects
 a Score from the list the store updates with the selected value.
 
