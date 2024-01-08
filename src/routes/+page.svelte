@@ -7,14 +7,19 @@
 
 	const { data } = $props();
 
-	const selectedCycle = createCycleState(data.cycles[data.cycles.length - 1]);
+	const lastEntry = data.cycles[data.cycles.length - 1];
+	const selectedCycle = createCycleState(lastEntry);
+
 	setContext('selectedCycle', selectedCycle);
+	$inspect(selectedCycle.cycle); // updates just fine!
 </script>
 
-<code>DEBUG | selectedCycle.cycle.id >>> {selectedCycle.cycle.id}</code>
-
+<!-- // wont update -->
+<code>Wont update!| selectedCycle.cycle.id >>> {selectedCycle.cycle.id}</code><br />
+<code>Does update| selectedCycle.cycle.id >>> {JSON.stringify(selectedCycle.cycle.id)}</code><br />
+<!-- // updates just fine!-->
 <!-- BUG! THIS ONLY UPDATES ONCE -->
-<h1>{selectedCycle.cycle.cycleYear}-{selectedCycle.cycle.cycleYear}</h1>
+<h1>{selectedCycle.cycle.cycle} - {selectedCycle.cycle.cycleYear}</h1>
 <span>RES {selectedCycle.cycle.resistance}</span>
 <span>ENL {selectedCycle.cycle.enlightened}</span>
 

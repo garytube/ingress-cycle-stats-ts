@@ -10,7 +10,6 @@
 	class="bubble"
 	onclick={() => (selectedCycle.cycle = cycle)}
 	class:enl={cycle.enlightened > cycle.resistance}
-	class:active={selectedCycle.cycle.id === cycle.id}
 >
 	{cycle.id} / {selectedCycle.cycle.id}
 </button>

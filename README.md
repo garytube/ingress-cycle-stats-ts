@@ -1,38 +1,57 @@
-# create-svelte
+# Svelte 5 Reactivity Bug(????)
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Hi, i have created a custom store with runes. It holds a simple game-score object. If the user selects
+a Score from the list the store updates with the selected value.
 
-## Creating a project
+But my UI will not update. But according to $effect & $inspect the value changed succsefully:
 
-If you're seeing this, you've probably already done this step. Congrats!
+![Alt text](image-1.png)
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+````svelte
+// in template - will not update ui
+<div>
+  {{selectedCycle.cycle.id}}
+</div>
 
-# create a new project in my-app
-npm create svelte@latest my-app
+// will  update ui
+<div>
+  {{JSON.stringify(selectedCycle.cycle.id)}}
+</div>
 ```
 
-## Developing
+    My Custom Store 
+    ```ts
+    // src/lib/selectedCycle.svelte.ts
+    import type { Cycle } from '../types';
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+    export function createCycleState(initialValue: Cycle) {
+      let cycle = $state<Cycle>(initialValue);
 
-```bash
-npm run dev
+      return {
+        get cycle() {
+          return cycle;
+        },
+        set cycle(newValue: Cycle) {
+          cycle = newValue;
+        }
+      };
+    }
+    ``
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+
+## Second Bug - maybe related 
+![bug2](image.png)
+When you click a square, the ID will not update if I add `class:active={selectedCycle.cycle.id === cycle.id}`. 
+If removed, everything just works fine.  First Number: square id / Second Number selected id
+```ts
+//src/lib/components/CycleCard.svelte
+
+<button
+	class="bubble"
+	onclick={() => (selectedCycle.cycle = cycle)}
+	class:enl={cycle.enlightened > cycle.resistance}
+	class:active={selectedCycle.cycle.id === cycle.id}  // if add this line reactivity breaks after the first click
+  >
+	{cycle.id} / {selectedCycle.cycle.id}
+</button>
 ```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
