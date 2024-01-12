@@ -1,25 +1,22 @@
-
-
-
 :root {
-    --bg: rgb(17, 17, 17);
-    --fg: rgb(4, 234, 245);
-    --res: #04eaf5;
-    --enl: #04ff46;
-    --warning: #ffff00;
-    --danger: #ff0047;
-    --ff: 'oswald', serif;
-    --score-font: 'coda', serif;
+	--bg: rgb(17, 17, 17);
+	--fg: rgb(4, 234, 245);
+	--res: #04eaf5;
+	--enl: #04ff46;
+	--warning: #ffff00;
+	--danger: #ff0047;
+	--ff: 'oswald', serif;
+	--score-font: 'coda', serif;
 }
 
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-    font-family: var(--ff);
-    background-color: var(--bg);
-    color: var(--fg);
-    margin: 0px;
-    padding: 0px 2rem;
+	font-family: var(--ff);
+	background-color: var(--bg);
+	color: var(--fg);
+	margin: 0px;
+	padding: 0px 2rem;
 }

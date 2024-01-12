@@ -21,7 +21,7 @@ But my UI will not update. But according to $effect & $inspect the value changed
 </div>
 ```
 
-    My Custom Store 
+    My Custom Store
     ```ts
     // src/lib/selectedCycle.svelte.ts
     import type { Cycle } from '../types';
@@ -41,9 +41,9 @@ But my UI will not update. But according to $effect & $inspect the value changed
     ``
 
 
-## Second Bug - maybe related 
+## Second Bug - maybe related
 ![bug2](image.png)
-When you click a square, the ID will not update if I add `class:active={selectedCycle.cycle.id === cycle.id}`. 
+When you click a square, the ID will not update if I add `class:active={selectedCycle.cycle.id === cycle.id}`.
 If removed, everything just works fine.  First Number: square id / Second Number selected id
 ```ts
 //src/lib/components/CycleCard.svelte
@@ -57,3 +57,4 @@ If removed, everything just works fine.  First Number: square id / Second Number
 	{cycle.id} / {selectedCycle.cycle.id}
 </button>
 ```
+````

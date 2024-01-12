@@ -1,30 +1,30 @@
 <script lang="ts">
+	import type { Writable } from 'svelte/store';
 	import { getContext } from 'svelte';
 	import type { Cycle } from '../../types';
 	const { cycle } = $props<{ cycle: Cycle }>();
 
-	const selectedCycle = getContext<{ cycle: Cycle }>('selectedCycle');
+	const selectedCycle = getContext<Writable<Cycle>>('cycleStore');
 </script>
 
 <button
 	class="bubble"
-	onclick={() => (selectedCycle.cycle = cycle)}
+	onmouseenter={() => selectedCycle.set(cycle)}
+	onclick={() => selectedCycle.set(cycle)}
 	class:enl={cycle.enlightened > cycle.resistance}
->
-	{cycle.id} / {selectedCycle.cycle.id}
-</button>
+	class:active={$selectedCycle.id === cycle.id}
+/>
 
 <style>
 	.bubble {
 		border: none;
 		display: inline-block;
-		height: 20px;
-		width: 20px;
+		height: 25px;
+		width: 25px;
 		font-size: 9px;
 		position: relative;
 		padding: 0px;
 		margin: 1px 3px;
-		border: 2px solid transparent;
 		transition: all 0.5s ease 0s;
 		background-color: white;
 		background: var(--res);
@@ -39,7 +39,7 @@
 	}
 
 	.active {
-		border: 2px solid yellow;
+		background: yellow;
 	}
 
 	.enl {
